@@ -11,6 +11,11 @@ class Sprite {
     this.position = position;
     this.velocity = velocity;
     this.height = 50
+    this.attackBox = {
+    position: this.position, // Want the hitbox to follow the player at all times.
+    height: 100,
+    width: 50,
+    }
 }
 //created method for drawing our rectangle.. notice how fillStyle is before fillRect...
   draw() {
