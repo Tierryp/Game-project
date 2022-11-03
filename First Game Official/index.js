@@ -15,7 +15,7 @@ const Obstacles = new Obstacle(
   canvas.height - 50,
   50,
   50,
-  "blue"
+  majinBuu
 );
 player.draw();
 
@@ -55,14 +55,14 @@ animationLoop = () => {
       Math.random() * canvas.height,
       50,
       50,
-      "green"
+      majinBuu
     );
     const myNewObstacle2 = new Obstacle(
       canvas.width,
       Math.random() * canvas.height,
       50,
       50,
-      "green"
+      majinBuu
     );
 
     const myNewObstacle3 = new Obstacle(
@@ -70,14 +70,14 @@ animationLoop = () => {
       Math.random() * canvas.height,
       50,
       50,
-      "green"
+      majinBuu
     );
     const myNewObstacle4 = new Obstacle(
       canvas.width,
       Math.random() * canvas.height,
       50,
       50,
-      "green"
+      majinBuu
     );
     ObstacleArray.push(myNewObstacle);
     ObstacleArray.push(myNewObstacle2);

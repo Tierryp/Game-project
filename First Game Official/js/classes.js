@@ -2,6 +2,8 @@ const gokuImg = new Image()
 gokuImg.src = '../Goku_Flying-removebg-preview (1).png'
 const gokuAttackImg = new Image();
 gokuAttackImg.src = '../Goku_Attack-removebg-preview.png';
+const majinBuu = new Image();
+majinBuu.src = '../Majin_Buu-removebg-preview (1).png'
 
 class Background {
   constructor({ position, imageSrc, size, scale = 1 }) {
@@ -161,8 +163,9 @@ class Player {
 }
 
 class Obstacle extends Player {
-  constructor(x, y, width, height, color) {
-    super(x, y, width, height, color);
+  constructor(x, y, width, height,  img) {
+    super(x, y, width, height, img);
+    this.spriteFrame = 0;
   }
 
   moveLeft() {
@@ -184,7 +187,13 @@ class Obstacle extends Player {
     }
   }
   draw() {
-    ctx.fillStyle = this.color;
-    ctx.fillRect(this.x, this.y, this.width, this.height, this.color);
+  
+    ctx.drawImage(
+      this.img,
+      this.x,
+      this.y,
+      this.width,
+      this.height
+    );
   }
 }
