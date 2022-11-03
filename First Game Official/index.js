@@ -1,13 +1,40 @@
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
+let ObstacleArray = [];
+let scoreFetcher = document.querySelector("#score span");
+let score = 0;
+
+let button = document.getElementsByClassName("button")[0]
+
+const bgMusic = new Audio("./Dragon Ball Z Opening 8 bit.mp3");
+
+button.addEventListener("click", function () {
+  bgMusic.volume = 0.4
+  ObstacleArray = []
+  myIntervalID = setInterval(animationLoop, 16);
+  bgMusic.play();
+  scoreFetcher.innerHTML = 0;
+  score = 0
+});
 
 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-let scoreFetcher = document.querySelector("span");
-let score = 0;
 
 
 
+const keys = {
+  w: {
+    pressed: false,
+  },
+
+  s: {
+    pressed: false,
+  },
+};
+
+
+
+let lastKey
 
 const player = new Player(50, canvas.height / 2.5, 50, 50, gokuImg, gokuAttackImg);
 const Obstacles = new Obstacle(
@@ -19,23 +46,49 @@ const Obstacles = new Obstacle(
 );
 player.draw();
 
+
+
+  
 window.addEventListener("keydown", function (event) {
+  event.preventDefault()
   switch (event.code) {
     case "KeyW":
-      player.moveUp();
+     keys.w.pressed = true;
+    lastKey = "w";
+     player.moveUp();
       break;
     case "KeyS":
+      keys.s.pressed = true;
+     lastKey = "s";
       player.moveDown();
       console.log("s pressed");
       break;
     case "Space":
+      const attackSound1 = new Audio("./gokuAttack.mp3");
+      attackSound1.volume = 0.4
       console.log("f pressed");
+      attackSound1.play()
       player.attack();
+
 
       break;
   }
 });
 
+
+window.addEventListener("keyup", function (event) {
+  switch (event.code) {
+    case "KeyW":
+      keys.w.pressed = false;
+    player.stop();
+      break;
+    case "KeyS":
+    keys.s.pressed = false;
+    player.stop();
+      console.log("s pressed");
+      break;
+  }
+})
 // function scoreAdder(Obstacle){
 //     if (my){
 
@@ -45,7 +98,8 @@ player.draw();
 
 let myIntervalID;
 
-const ObstacleArray = [];
+let highScore = document.querySelector('#HighScore span')
+
 let frameCount = 0;
 animationLoop = () => {
   frameCount++;
@@ -95,18 +149,25 @@ animationLoop = () => {
   cloud4.update()
   cloud5.update()
   
-  
+  player.update1()
   player.draw();
   if (frameCount % 15 === 0) {
     player.spriteFrame++;
     player.spriteFrame = player.spriteFrame % 4;
   }
   
+   if (keys.w.pressed && lastKey === "w") {
+     player.velocity.y = -5;
+   } else if (keys.s.pressed && lastKey === "s") {
+     player.velocity.y = 5;
+   } 
   for (let i = ObstacleArray.length - 1; i >= 0; i--) {
     ObstacleArray[i].moveLeft();
 
     if (ObstacleArray[i].collisionCheck(player)) {
+      bgMusic.pause();
       clearInterval(myIntervalID);
+      
     }
     ObstacleArray[i].draw();
 
@@ -125,11 +186,17 @@ animationLoop = () => {
     ) {
       score++;
       scoreFetcher.innerHTML = score;
+      if (score > Number(highScore.innerHTML)){
+        highScore.innerHTML = score
+      }
       player.isAttacking = false;
       console.log("good");
+      const buuDeath = new Audio('Fat buu death.mp3')
+      buuDeath.volume = 1
+      buuDeath.play()
       ObstacleArray.splice(i, 1);
     }
   }
 };
 
-myIntervalID = setInterval(animationLoop, 16);
+

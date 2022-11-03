@@ -1,21 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="./styles/style.css">
-</head>
-<body>
-<h1>Score:<span>0</span></h1>
-    <canvas width="1024" height = "524"></canvas>
-<audio id=“audio” controls style=>
-    <source src=“dbz-voice-clips-goku_AzYaEVg9.mp3” type=“audio/mp3"> 
-</audio>
-    <script src='./js/classes.js'></script>
-<script src = './index.js'></script>
-<script src = './js/activeImages.js'></script>
+    <link rel="stylesheet" href="./styles/style.css" />
+  </head>
+  <body>
+    <div id = "topDiv">
+      <div id="score">Score:<span>0</span></div>
+       <button class="button">Start Game</button>
+      <div id ="HighScore">HighScore: <span>0</span></div>
+    </div>
+    <div>
+      <canvas width="1024" height="524"></canvas>
+    </div>
+    <audio
+      id="audio"
+      src="./gokuAttack.mp3"
+      style="display: none"
+      type="audio/mp3"
+    ></audio>
 
-</body>
+    <script src="./js/classes.js"></script>
+    <script src="./index.js"></script>
+    <script src="./js/activeImages.js"></script>
+  </body>
 </html>

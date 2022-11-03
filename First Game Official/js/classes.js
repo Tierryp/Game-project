@@ -5,6 +5,9 @@ gokuAttackImg.src = '../Goku_Attack-removebg-preview.png';
 const majinBuu = new Image();
 majinBuu.src = '../Majin_Buu-removebg-preview (1).png'
 
+
+
+
 class Background {
   constructor({ position, imageSrc, size, scale = 1 }) {
     this.position = position;
@@ -100,11 +103,15 @@ class Sprite {
 }
 
 class Player {
-  constructor(x, y, width, height, img, attackImg) {
+  constructor(x, y, width, height, img, attackImg,velocity) {
     this.x = x;
     this.y = y;
     this.width = width;
     this.height = height;
+this.velocity = {
+    x:0,
+    y:0
+}
     this.img = img;
     this.attackImg = attackImg;
     this.attackBox = {
@@ -114,7 +121,14 @@ class Player {
     };
     this.isAttacking;
     this.spriteFrame = 0;
-  }
+  
+}
+update1() {
+    this.y += this.velocity.y
+}
+stop (){
+ this.velocity.y = 0
+}
   draw() {
     
 
@@ -155,10 +169,12 @@ class Player {
     }, 1000);
   }
   moveUp() {
-    this.y -= 10;
+    
+    this.velocity.y = -5
+    
   }
   moveDown() {
-    this.y += 10;
+    this.velocity.y = 5;
   }
 }
 
@@ -169,7 +185,7 @@ class Obstacle extends Player {
   }
 
   moveLeft() {
-    this.x -= 3;
+    this.x -= (3 + score) ;
   }
   collisionCheck(Obstacle) {
     if (
