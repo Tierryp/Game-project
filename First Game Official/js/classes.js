@@ -170,11 +170,11 @@ stop (){
   }
   moveUp() {
     
-    this.velocity.y = -5
+    this.velocity.y = -2
     
   }
   moveDown() {
-    this.velocity.y = 5;
+    this.velocity.y = 2;
   }
 }
 
@@ -185,7 +185,7 @@ class Obstacle extends Player {
   }
 
   moveLeft() {
-    this.x -= (3 + score) ;
+    this.x -= 9 + score + 1 ;
   }
   collisionCheck(Obstacle) {
     if (
